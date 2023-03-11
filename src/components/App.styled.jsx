@@ -8,9 +8,3 @@ export const Container = styled.div`
   border: 2px solid black;
   background-color: beige;
 `;
-
-export const Input = styled.input`
-  display: block;
-  margin: 5px auto;
-  padding: 5px;
-`;

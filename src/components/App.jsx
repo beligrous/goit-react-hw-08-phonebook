@@ -1,25 +1,19 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Container } from './App.styled';
-import ContactForm from './ContactForm/ContactForm';
-import Filter from './Filter/Filter';
-import ContactList from './ContactList/ContactList';
-import { fetchContacts } from '../redux/operations';
+import { Routes, Route } from 'react-router-dom';
+import PhonebookPage from '../Pages/PhonebookPage/PhonebookPage';
+import RegisterPage from '../Pages/RegisterPage/RegisterPage';
+import LoginPage from 'Pages/LoginPage/LoginPage';
+import NavBar from './NavBar/NavBar';
 
 export function App() {
-  const dispatch = useDispatch();
-  useState(() => {
-    dispatch(fetchContacts());
-  }, []);
   return (
     <Container>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <div>
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-      </div>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/phonebook" element={<PhonebookPage />} />
+      </Routes>
     </Container>
   );
 }

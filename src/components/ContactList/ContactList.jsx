@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/operations';
@@ -16,9 +17,11 @@ function ContactList() {
   const error = useSelector(getError);
   const isLoading = useSelector(getLoading);
   let initContacts = contacts ? contacts : [];
+  Notiflix.Notify.init({});
 
-  const onClickDelete = id => {
-    dispatch(deleteContact(id));
+  const onClickDelete = item => {
+    dispatch(deleteContact(item.id));
+    Notiflix.Notify.success(`The contact ${item.name} was deleted !`);
   };
 
   const findContacts = () => {
@@ -47,7 +50,7 @@ function ContactList() {
                   {item.name}:{item.number}
                 </span>
 
-                <Delete onClick={() => onClickDelete(item.id)} type="button">
+                <Delete onClick={() => onClickDelete(item)} type="button">
                   Delete
                 </Delete>
               </ListItem>

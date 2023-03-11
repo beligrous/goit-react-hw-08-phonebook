@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts } from 'redux/selectors';
@@ -10,6 +11,7 @@ function ContactForm() {
   const contacts = useSelector(getContacts);
   let initContacts = contacts ? contacts : [];
   const dispatch = useDispatch();
+  Notiflix.Notify.init({});
 
   const handleSubmitContact = e => {
     e.preventDefault();
@@ -25,9 +27,12 @@ function ContactForm() {
 
     if (nonEqualArray.length === initContacts.length) {
       dispatch(addContact(data));
+      Notiflix.Notify.success(
+        `The contact ${data.name} was added to contacts !`
+      );
       reset();
     } else {
-      alert(`${data.name} is already in contacts!`);
+      Notiflix.Notify.info(`${data.name} is already in contacts!`);
     }
   };
 
