@@ -4,15 +4,18 @@ import PhonebookPage from '../Pages/PhonebookPage/PhonebookPage';
 import RegisterPage from '../Pages/RegisterPage/RegisterPage';
 import LoginPage from 'Pages/LoginPage/LoginPage';
 import NavBar from './NavBar/NavBar';
+import PublicRoute from 'Routes/PublicRoute';
 
 export function App() {
   return (
     <Container>
       <NavBar />
       <Routes>
-        <Route path="/" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/phonebook" element={<PhonebookPage />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/users/signup" element={<RegisterPage />} />
+          <Route path="/users/login" element={<LoginPage />} />
+        </Route>
+        <Route path="/contacts" element={<PhonebookPage />} />
       </Routes>
     </Container>
   );

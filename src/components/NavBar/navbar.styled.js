@@ -9,6 +9,7 @@ export const Nav = styled.nav`
 
 export const Link = styled(NavLink)`
   text-decoration: none;
+  margin-right: 15px;
   color: black;
   &.active {
     font-weight: bold;
