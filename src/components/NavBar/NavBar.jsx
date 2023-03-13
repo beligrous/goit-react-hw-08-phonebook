@@ -1,15 +1,23 @@
 import { Nav, Link } from './navbar.styled';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getIsLogin, getUserName } from 'redux/selectors';
+import { logout } from 'redux/auth-operations';
 
 const NavBar = () => {
   const isLoggined = useSelector(getIsLogin);
   const userName = useSelector(getUserName);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => dispatch(logout());
+
   return (
     <Nav>
       {isLoggined ? (
         <>
-          <span>Hello {userName}</span> <button type="button">LogOut</button>
+          <span>Hello, {userName}</span>{' '}
+          <button type="button" onClick={handleLogout}>
+            LogOut
+          </button>
         </>
       ) : (
         <>

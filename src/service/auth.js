@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const instanse = axios.create({
+export const instanse = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
 });
 
@@ -21,4 +21,9 @@ export const loginUser = async data => {
   const response = await instanse.post('/users/login', data);
   setToken(response.data.token);
   return response;
+};
+
+export const logoutUser = async () => {
+  await instanse.post('users/logout');
+  setToken();
 };
