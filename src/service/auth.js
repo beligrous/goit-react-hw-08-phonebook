@@ -27,3 +27,9 @@ export const logoutUser = async () => {
   await instanse.post('users/logout');
   setToken();
 };
+
+export const currentUser = async token => {
+  setToken(token);
+  const response = await instanse.get('users/current');
+  return response.data;
+};

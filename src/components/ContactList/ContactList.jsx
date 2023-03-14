@@ -1,5 +1,6 @@
 import Notiflix from 'notiflix';
 import React from 'react';
+import { FallingLines } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/operations';
 import {
@@ -38,7 +39,14 @@ function ContactList() {
 
   return (
     <>
-      {isLoading && <p>Please wait...</p>}
+      {isLoading && (
+        <FallingLines
+          color="burlywood"
+          width="50"
+          visible={true}
+          ariaLabel="falling-lines-loading"
+        />
+      )}
       {error ? (
         <p>Sorry...{error}</p>
       ) : (

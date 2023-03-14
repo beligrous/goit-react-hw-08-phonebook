@@ -1,5 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { signupUser, loginUser, logoutUser } from '../service/auth';
+import {
+  signupUser,
+  loginUser,
+  logoutUser,
+  currentUser,
+} from '../service/auth';
 
 export const signup = createAsyncThunk(
   'auth/signup',
@@ -29,3 +34,26 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const current = createAsyncThunk(
+  'auth/current',
+  async (_, thunkAPI) => {
+    const { persistedReducer } = thunkAPI.getState();
+    const token = persistedReducer.auth.token;
+    try {
+      const response = await currentUser(token);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+  {
+    condition: (_, thunkAPI) => {
+      const { persistedReducer } = thunkAPI.getState();
+      const token = persistedReducer.auth.token;
+      if (!token) {
+        return false;
+      }
+    },
+  }
+);

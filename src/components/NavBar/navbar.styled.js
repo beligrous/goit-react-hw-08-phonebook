@@ -16,3 +16,10 @@ export const Link = styled(NavLink)`
     color: burlywood;
   }
 `;
+
+export const Button = styled.button`
+  display: inline-block;
+  background-color: burlywood;
+  border-radius: 5px;
+  margin-left: 10px;
+`;
