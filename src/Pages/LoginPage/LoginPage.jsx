@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Input } from '../RegisterPage/register.styled';
 import { login } from 'redux/auth-operations';
+import { getUserError } from 'redux/selectors';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const error = useSelector(getUserError);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -28,6 +30,7 @@ const LoginPage = () => {
           <Input
             type="email"
             name="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             value={email}
             onChange={({ target }) => setEmail(target.value)}
             required
@@ -47,6 +50,7 @@ const LoginPage = () => {
           Login
         </Button>
       </Form>
+      {error && <p>Please try another email or password... </p>}
     </div>
   );
 };
