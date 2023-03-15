@@ -15,13 +15,6 @@ const RegisterPage = () => {
     e.preventDefault();
     const data = { name, email, password };
     dispatch(signup(data));
-    reset();
-  };
-
-  const reset = () => {
-    setName('');
-    setEmail('');
-    setPassword('');
   };
 
   return (

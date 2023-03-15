@@ -14,13 +14,8 @@ const LoginPage = () => {
     e.preventDefault();
     const data = { email, password };
     dispatch(login(data));
-    reset();
   };
 
-  const reset = () => {
-    setEmail('');
-    setPassword('');
-  };
   return (
     <div>
       <h2>To enter your phonebook, login please</h2>

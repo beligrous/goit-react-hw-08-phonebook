@@ -2,6 +2,7 @@ import { Nav, Link, Button } from './navbar.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIsLogin, getUserName } from 'redux/selectors';
 import { logout } from 'redux/auth-operations';
+import { changeAdress } from 'redux/auth-slice';
 
 const NavBar = () => {
   const isLoggined = useSelector(getIsLogin);
@@ -9,6 +10,10 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => dispatch(logout());
+
+  const handleAdressChange = () => {
+    dispatch(changeAdress());
+  };
 
   return (
     <Nav>
@@ -21,8 +26,12 @@ const NavBar = () => {
         </>
       ) : (
         <>
-          <Link to="/users/signup">Signup</Link>
-          <Link to="/users/login">Login</Link>
+          <Link to="/users/signup" onClick={handleAdressChange}>
+            Signup
+          </Link>
+          <Link to="/users/login" onClick={handleAdressChange}>
+            Login
+          </Link>
         </>
       )}
     </Nav>

@@ -10,6 +10,16 @@ const authSlice = createSlice({
     loading: false,
     error: null,
   },
+  reducers: {
+    changeAdress: {
+      reducer: state => {
+        return {
+          ...state,
+          error: null,
+        };
+      },
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(signup.pending, state => {
@@ -76,11 +86,9 @@ const authSlice = createSlice({
       .addCase(current.pending, state => {
         return { ...state, loading: true, error: null };
       })
-      .addCase(current.fulfilled, (state, action) => {
+      .addCase(current.fulfilled, state => {
         return {
           ...state,
-          // user: action.payload,
-          // token: action.payload.token,
           loading: false,
           isLogin: true,
         };
@@ -97,3 +105,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
+export const { changeAdress } = authSlice.actions;
